@@ -69,4 +69,4 @@ Ver guía de estudio en `examenes/guia-parcial-3.md`.
 | Trabajo en equipo | 5% |
 | Presentación oral | 5% |
 
-Ver rúbrica completa en `proyecto-final/README.md`.
+Ver rúbrica completa en `../INF222-Proyecto-Final-2026-2/README.md`.

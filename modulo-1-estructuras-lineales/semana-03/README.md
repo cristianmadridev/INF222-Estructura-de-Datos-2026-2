@@ -21,7 +21,7 @@
    - **Cola de prioridad**: los elementos salen según su prioridad, no por orden de llegada (usada en sistemas operativos, algoritmo de Dijkstra)
    - **Deque** (Double-ended Queue): inserción y eliminación en ambos extremos
 2. Ejemplos de uso real: buffer circular en redes, reproducción de música en bucle, historial de comandos en terminal
-3. Presentación formal del proyecto final: opciones de tema, cronograma, formación de equipos (ver `proyecto-final/README.md`)
+3. Presentación formal del proyecto final: opciones de tema, cronograma, formación de equipos (ver `../INF222-Proyecto-Final-2026-2/README.md`)
 
 ### Laboratorio (miércoles Gr. A / viernes Gr. B)
 
@@ -41,7 +41,7 @@
 
 ## Tarea / trabajo autónomo
 
-- Con tu equipo, explora las 5 opciones de tema propuestas para el proyecto final (ver `proyecto-final/README.md`).
+- Con tu equipo, explora las 5 opciones de tema propuestas para el proyecto final (ver `../INF222-Proyecto-Final-2026-2/README.md`).
 - Repasa pilas y colas con VisuAlgo antes del quiz de la semana 4.
 
 ---
@@ -74,4 +74,4 @@ visitar("d.com"):   actual="d.com",  pila_atras=["about:blank","a.com","b.com"],
 |---------|-----------|
 | VisuAlgo → Stack | Repasar antes del quiz formativo |
 | VisuAlgo → Queue | Repasar antes del quiz formativo |
-| `proyecto-final/README.md` | Leer para el kickoff del proyecto |
+| `../INF222-Proyecto-Final-2026-2/README.md` | Leer para el kickoff del proyecto |
