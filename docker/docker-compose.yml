@@ -1,0 +1,22 @@
+# Entorno reproducible para INF 222 — Estructura de Datos (2026-2)
+# Ejecutar desde la raíz del repositorio: docker compose -f docker/docker-compose.yml run --rm lab
+services:
+  lab:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace
+    command: bash
+
+  # Corre las pruebas de un laboratorio o del proyecto sin instalar nada localmente.
+  # Ejemplo: docker compose -f docker/docker-compose.yml run --rm test modulo-1-estructuras-lineales/semana-01/laboratorio
+  test:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace
+    entrypoint: ["pytest", "-v"]

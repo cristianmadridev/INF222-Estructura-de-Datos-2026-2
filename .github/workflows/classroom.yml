@@ -1,0 +1,39 @@
+name: GitHub Classroom Autograding
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install pytest
+
+      # Corre TODOS los archivos test_*.py que existan en el repo (los de cada
+      # semana se agregan progresivamente a medida que avanza el semestre).
+      - name: Pruebas del semestre (pytest)
+        id: pytest-run
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Pruebas (pytest)
+          setup-command: ''
+          command: pytest -q
+          timeout: 10
+          max-score: 100
+
+      - uses: classroom-resources/autograding-grading-reporter@v1
+        if: always()
+        env:
+          PYTEST-RUN_RESULTS: "${{steps.pytest-run.outputs.result}}"
+        with:
+          runners: pytest-run
