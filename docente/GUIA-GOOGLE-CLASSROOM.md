@@ -101,10 +101,24 @@ Cada semana, antes de la clase de teoría: **Trabajo de clase → Crear → Anun
 la actividad de laboratorio, y la fecha límite. Toma 2 minutos y mantiene a la clase orientada sin
 depender de que revisen el repositorio por su cuenta.
 
-## 8. Automatizar esto (opcional)
+## 8. Automatizar esto con Apps Script (ya está escrito)
 
-Si en algún momento quieres automatizar la creación de los temas y las 15 tareas en vez de hacerlo a
-mano, es posible con un script de **Google Apps Script** (script.google.com) que use el servicio
-avanzado **Classroom** — corre en tu propia cuenta de Google, sin compartir ninguna credencial conmigo,
-y solo necesitas autorizarlo una vez desde el navegador (parecido a como autenticaste `gh`). Puedo
-escribirte ese script con los datos exactos de las 15 semanas si lo quieres — dímelo y lo preparo.
+`docente/apps-script-classroom.gs` automatiza los pasos 1-6 completos: crea (o reutiliza) el curso,
+los 15 temas, la pregunta del usuario de GitHub, el material de bienvenida, y las 15 tareas semanales
++ parciales + hitos del proyecto — con los mismos títulos, categorías y puntos de esta guía. Corre
+enteramente en tu cuenta de Google, sin compartir ninguna credencial conmigo.
+
+**Cómo usarlo** (instrucciones completas dentro del propio archivo):
+
+1. script.google.com → Nuevo proyecto → pega el contenido de `apps-script-classroom.gs`.
+2. Servicios (+) → agrega **Google Classroom API**.
+3. Ejecuta la función `main` — la primera vez te pedirá autorizar el acceso, acéptalo.
+4. Por defecto corre en modo `DRY_RUN` (solo imprime en el registro lo que haría, sin crear nada).
+   Revisa el registro con calma.
+5. Cuando se vea bien, cambia `DRY_RUN` a `false` dentro del script y ejecútalo de nuevo. Es seguro
+   volver a correrlo si algo falla a la mitad — no duplica lo que ya existe.
+
+**Lo único que el script NO hace** es activar "Categorías de calificación ponderadas" en Ajustes →
+Calificación (§5) — el soporte de esa función específica en la API pública de Classroom no está
+confirmado, así que se deja como el único paso manual (2 minutos). Los puntos de cada tarea ya están
+fijados para que, activada esa función, el promedio salga correcto sin ajustar nada más.
