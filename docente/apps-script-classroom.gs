@@ -40,9 +40,13 @@
 const CONFIG = {
   DRY_RUN: true, // true = solo simula e imprime en el registro. Cambia a false para crear de verdad.
 
-  // Si ya creaste el curso a mano en classroom.google.com, pega aquí su ID
-  // (está en la URL: classroom.google.com/c/ESTE_ID). Si lo dejas vacío,
-  // el script crea el curso automáticamente.
+  // RECOMENDADO: crea el curso a mano en classroom.google.com (+ → Crear clase,
+  // 30 segundos) y pega aquí su ID (está en la URL: classroom.google.com/c/ESTE_ID).
+  // Las cuentas de Google personales (no Google Workspace for Education) casi
+  // siempre reciben el error "CourseStateDenied" si el script intenta crear el
+  // curso por API — creándolo tú mismo en la interfaz evitas ese permiso por
+  // completo. Deja este campo vacío solo si tu cuenta ya confirmó que puede
+  // crear cursos por API (lo sabrás porque no te dio ese error).
   EXISTING_COURSE_ID: "",
 
   COURSE_NAME: "INF 222 — Estructura de Datos (2026-2)",
@@ -159,15 +163,33 @@ function getOrCreateCourse_() {
     Logger.log('[DRY_RUN] Crearía el curso "%s"', CONFIG.COURSE_NAME);
     return "DRY_RUN_COURSE_ID";
   }
-  const course = Classroom.Courses.create({
-    name: CONFIG.COURSE_NAME,
-    section: CONFIG.COURSE_SECTION,
-    room: CONFIG.COURSE_ROOM,
-    description: CONFIG.COURSE_DESCRIPTION,
-    ownerId: "me",
-    courseState: "ACTIVE",
-  });
-  Logger.log('Curso creado: "%s" (id %s)', course.name, course.id);
+  // No se fija courseState aquí a propósito: pedir "ACTIVE" directamente falla
+  // con CourseStateDenied en la mayoría de cuentas personales (no Workspace for
+  // Education). Sin el campo, la API crea el curso en estado PROVISIONED.
+  let course;
+  try {
+    course = Classroom.Courses.create({
+      name: CONFIG.COURSE_NAME,
+      section: CONFIG.COURSE_SECTION,
+      room: CONFIG.COURSE_ROOM,
+      description: CONFIG.COURSE_DESCRIPTION,
+      ownerId: "me",
+    });
+  } catch (e) {
+    throw new Error(
+      "No se pudo crear el curso por API (" + e.message + "). " +
+      "Tu cuenta probablemente no tiene permiso para crear cursos de Classroom por API — " +
+      "esto es normal en cuentas de Google personales. Solución: crea el curso a mano en " +
+      "classroom.google.com (+ → Crear clase, 30 segundos), copia su ID desde la URL " +
+      "(classroom.google.com/c/ESTE_ID) y pégalo en CONFIG.EXISTING_COURSE_ID arriba. Luego " +
+      "vuelve a ejecutar main()."
+    );
+  }
+  Logger.log('Curso creado en estado PROVISIONED: "%s" (id %s)', course.name, course.id);
+  Logger.log(
+    "IMPORTANTE: entra a classroom.google.com — este curso recién creado por API pedirá que " +
+    "lo confirmes/actives desde la interfaz antes de que sea visible y usable con normalidad."
+  );
   return course.id;
 }
 
