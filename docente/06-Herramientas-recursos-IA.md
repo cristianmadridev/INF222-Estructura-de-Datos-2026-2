@@ -11,7 +11,7 @@
 | **Python 3** (versión estable más reciente) | Lenguaje de programación principal, en actualización coherente con la bibliografía oficial (ver justificación en `01-Syllabus-actualizado.md`). |
 | **Visual Studio Code** | Entorno de desarrollo integrado recomendado; se sugieren extensiones de Python, linting (p. ej. Pylint/Flake8) y control de versiones integrado. |
 | **Git** | Sistema de control de versiones utilizado desde el primer laboratorio para todo el trabajo individual y grupal. |
-| **GitHub** | Plataforma de alojamiento de repositorios y canal oficial de entrega de laboratorios y proyecto final, mediante repositorios plantilla ("Use this template") que cada estudiante/equipo copia a su propia cuenta. |
+| **GitHub** | Plataforma de alojamiento de repositorios y canal oficial de entrega de laboratorios y proyecto final, mediante una copia privada del repositorio que el docente crea para cada estudiante/equipo a partir de una plantilla. |
 | **Python Tutor** (pythontutor.com) | Visualizador de ejecución paso a paso de código Python, incluyendo el modelo de memoria (referencias, objetos, pila de llamadas). Uso intensivo en los temas de punteros/referencias (semana 4) y recursividad (semana 8). |
 | **VisuAlgo** (visualgo.net) | Visualizador de estructuras de datos y algoritmos (pilas, colas, listas enlazadas, árboles, grafos, ordenación, búsqueda). Uso recomendado como apoyo de estudio en prácticamente todas las semanas del curso. |
 | **Replit** | Entorno de desarrollo en la nube, alternativa/respaldo para estudiantes con limitaciones de instalación local o para demostraciones rápidas en clase. |

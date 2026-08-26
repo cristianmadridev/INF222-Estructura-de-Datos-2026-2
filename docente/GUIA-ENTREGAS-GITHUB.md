@@ -1,62 +1,90 @@
-# Guía docente — Entregas por GitHub (sin GitHub Classroom)
+# Guía docente — Entregas por GitHub (repos privados, sin GitHub Classroom)
 
 GitHub Classroom está en transición hacia soluciones de terceros y no está disponible para configurar
-asignaciones nuevas en este momento. En vez de depender de ese servicio, este curso usa **la función
-nativa de plantillas de GitHub** ("Template repository"), que ya está activada en los dos repositorios
-del curso y no depende de ningún servicio externo:
+asignaciones nuevas. Los repos del curso se mantienen **privados** (incluyen guías de examen), así que
+el autoservicio con "Use this template" no funciona: un estudiante sin acceso no puede ni ver la
+plantilla. En su lugar, **el docente (o Claude, con `gh` ya autenticado) crea una copia privada por
+estudiante** a partir de la plantilla y lo agrega como colaborador de su propia copia — el estudiante
+nunca necesita acceso a la plantilla en sí.
 
-| Repositorio | Tipo | URL |
+| Repositorio (plantilla, privado) | Tipo | URL |
 |---|---|---|
-| Laboratorios (individual) | 1 copia por estudiante | `https://github.com/avila-fiec-up/INF222-Estructura-de-Datos-2026-2` |
-| Proyecto final (equipo) | 1 copia por equipo de 3-4 | `https://github.com/avila-fiec-up/INF222-Proyecto-Final-2026-2` |
-
-Ambos son **privados** y están marcados como plantilla (*Template repository* activo).
+| Laboratorios (individual) | 1 copia privada por estudiante | `https://github.com/avila-fiec-up/INF222-Estructura-de-Datos-2026-2` |
+| Proyecto final (equipo) | 1 copia privada por equipo de 3-4 | `https://github.com/avila-fiec-up/INF222-Proyecto-Final-2026-2` |
 
 ---
 
-## 1. Cómo obtiene su copia cada estudiante (instrucciones para ellos)
+## 1. Recolectar el roster (nombre + usuario de GitHub)
 
-Comparte esto tal cual con la clase — también está en `README.md` de cada repo:
+La forma más simple: en Google Classroom, publica en la semana 1 una **Pregunta** de respuesta corta
+("¿Cuál es tu usuario de GitHub? Créalo antes de responder si no tienes uno") — Classroom ya asocia
+cada respuesta al nombre real del estudiante, así que obtienes el roster completo en una sola lista,
+sin depender de que te escriban por correo. Detalle en `GUIA-GOOGLE-CLASSROOM.md`.
 
-1. Entra a la URL del repo de laboratorios (arriba).
-2. Botón verde **"Use this template"** → **"Create a new repository"**.
-3. **Owner**: tu propia cuenta de GitHub (no hace falta pertenecer a ninguna organización).
-4. **Repository name**: puedes dejar el mismo nombre o poner `INF222-<tu-nombre>-2026-2`.
-5. **Visibility**: **Private**.
-6. Click **Create repository from template** — en segundos tienes tu propia copia completa (los 15 módulos, exámenes, políticas, Docker) bajo tu cuenta.
-7. En **Settings → Collaborators** de tu repo nuevo, agrega al docente (`profangelavila671-spec`) con acceso de lectura como mínimo.
-8. Clona tu copia y trabaja como siempre: `git clone`, `git add`, `git commit`, `git push`.
+Para el proyecto (equipos), necesitas además el nombre del equipo y sus 3-4 integrantes — puede ser la
+misma pregunta reformulada en la semana 3, después del kickoff.
 
-Para el **proyecto final** (equipo): un solo integrante repite los mismos pasos con el repo de proyecto, y luego agrega como colaboradores a sus compañeros de equipo **y** al docente desde **Settings → Collaborators**.
+## 2. Crear un repo privado por estudiante (individual)
 
-## 2. Cómo tú (docente) ves y sigues todas las entregas
-
-No hay un tablero central como el de Classroom, pero no necesitas uno: en cuanto un estudiante te agrega como colaborador, su repo aparece en tu propia cuenta. Para listarlos todos de una vez (con la GitHub CLI, `gh`, ya instalada y autenticada en esta máquina):
+Con el roster en mano (una lista de usuarios de GitHub), esto se hace con `gh` — pégamelo en el chat y
+lo corro, o hazlo tú mismo:
 
 ```bash
-# Todos los repos donde eres colaborador (no propietario) — es decir, todas las entregas
-gh api /user/repos --paginate -X GET -f affiliation=collaborator --jq '.[] | select(.name | test("INF222")) | .full_name'
+export PATH="$HOME/.local/bin:$PATH"
+
+# Por cada estudiante:
+USUARIO="usuario-del-estudiante"
+NOMBRE_REPO="inf222-$USUARIO-2026-2"
+
+gh repo create "avila-fiec-up/$NOMBRE_REPO" \
+  --private \
+  --template "avila-fiec-up/INF222-Estructura-de-Datos-2026-2"
+
+gh api -X PUT "repos/avila-fiec-up/$NOMBRE_REPO/collaborators/$USUARIO" -f permission=push
 ```
 
-Recomendación práctica: pide que cada estudiante te agregue **en las primeras 48 horas** de la semana 1 y usa ese mismo comando como pase de lista de quién ya se puso al día.
+El script `scripts/crear-repos-estudiantes.sh` de este repositorio automatiza esto para una lista
+completa (un usuario de GitHub por línea) — ver la cabecera del script para el uso exacto.
 
-Para clonar/descargar todas las entregas antes de calificar:
+GitHub le manda automáticamente al estudiante una **invitación por correo** a su propio repo en cuanto
+lo agregas como colaborador — no hace falta que tú le pases el link a mano, ni que Classroom lo cargue.
+El estudiante la acepta, clona su copia, y trabaja como siempre.
+
+## 3. Crear un repo privado por equipo (proyecto final)
+
+Igual que el paso 2, pero desde la plantilla de proyecto y agregando a **todos** los integrantes del
+equipo como colaboradores del mismo repo:
 
 ```bash
-gh api /user/repos --paginate -X GET -f affiliation=collaborator --jq '.[] | select(.name | test("INF222")) | .clone_url' \
-  | xargs -n1 git clone
+NOMBRE_REPO="inf222-proyecto-equipo-01-2026-2"
+
+gh repo create "avila-fiec-up/$NOMBRE_REPO" \
+  --private \
+  --template "avila-fiec-up/INF222-Proyecto-Final-2026-2"
+
+for USUARIO in usuario1 usuario2 usuario3; do
+  gh api -X PUT "repos/avila-fiec-up/$NOMBRE_REPO/collaborators/$USUARIO" -f permission=push
+done
 ```
 
-## 3. Autocalificación
+## 4. Cómo el docente ve y sigue todas las entregas
+
+```bash
+# Todos los repos donde eres colaborador Y propietario que empiecen con "inf222" — o sea, todo lo creado
+gh repo list avila-fiec-up --limit 200 --json name,pushedAt,isPrivate --jq '.[] | select(.name | test("(?i)inf222"))'
+```
+
+Como tú (el docente) eres quien crea cada repo, ya son tuyos — no necesitas el paso extra de "todos los
+repos donde soy colaborador" que sí haría falta con el modelo de autoservicio.
+
+## 5. Autocalificación
 
 Cada copia hereda `.github/workflows/autograding.yml`, que corre `pytest` automáticamente en cada
-`git push` del propio estudiante (ver la pestaña **Actions** de su repo) — funciona igual que antes,
-no depende de Classroom para nada. GitHub Actions da 2,000 minutos gratis al mes en cuentas
-personales, más que suficiente para este curso.
+`git push` del propio estudiante (pestaña **Actions** de su repo) — no depende de Classroom ni de
+ninguna acción de terceros.
 
-## 4. Si más adelante GitHub Classroom vuelve a estar disponible
+## 6. Si más adelante GitHub Classroom vuelve a estar disponible
 
-Los dos repos ya cumplen todos los requisitos para usarlo (marcados como plantilla, en una
-organización). Si quieres retomarlo, solo faltaría: entrar a classroom.github.com, vincular la
-organización `avila-fiec-up`, y crear una asignación individual y una grupal apuntando a estos mismos
-repos — el resto del curso no cambia.
+Los dos repos plantilla ya cumplen los requisitos (marcados como plantilla, en una organización). Si
+retomas Classroom, solo faltaría vincular la organización `avila-fiec-up` y crear las asignaciones —
+el resto del curso no cambia.

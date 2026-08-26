@@ -8,7 +8,9 @@
 
 ## Bienvenida
 
-Este repositorio es la **plantilla** del curso. En la semana 1, cada estudiante crea **su propia copia** con el botón "Use this template" de GitHub (instrucciones abajo, en "Configuración inicial") y trabaja ahí durante todo el semestre: laboratorios, avances del proyecto final y notas de clase.
+Este repositorio es la **plantilla** del curso, privada. En la semana 1 el docente crea tu propia
+copia privada y te agrega como colaborador (instrucciones abajo, en "Configuración inicial") — ahí
+trabajas todo el semestre: laboratorios, avances del proyecto final y notas de clase.
 
 > **Regla de oro**: ninguna entrega se acepta por correo electrónico. Todo va en este repositorio, organizado en la carpeta correcta, antes de la fecha límite.
 
@@ -117,14 +119,11 @@ python --version     # debe mostrar Python 3.x.x
 git --version        # debe mostrar git version 2.x.x
 ```
 
-Crea **tu propia copia** de este repositorio (no trabajes directamente sobre este, es la plantilla compartida):
-
-1. Entra a `https://github.com/avila-fiec-up/INF222-Estructura-de-Datos-2026-2`.
-2. Botón verde **"Use this template" → "Create a new repository"**.
-3. Owner: tu propia cuenta · Visibility: **Private**.
-4. En **Settings → Collaborators** de tu copia nueva, agrega al docente (`profangelavila671-spec`).
-
-Luego clona **tu** copia (no la plantilla del docente):
+Este repositorio (`INF222-Estructura-de-Datos-2026-2`) es la **plantilla del docente** — es privada,
+así que no puedes verla ni copiarla tú mismo. En la semana 1, después de que respondas con tu usuario
+de GitHub en Google Classroom, el docente crea **tu propia copia privada** a partir de esta plantilla
+y te agrega como colaborador. GitHub te manda un correo de invitación automáticamente — acéptala y
+clona tu copia (nunca la plantilla del docente):
 
 ```bash
 git clone https://github.com/<tu-usuario>/<nombre-de-tu-repo>.git

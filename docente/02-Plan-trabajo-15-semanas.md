@@ -28,7 +28,7 @@ Este documento desarrolla, semana por semana, el plan de trabajo del curso, sigu
 Exposición dialogada sobre estructuras de datos y complejidad computacional. Ejercicio en pizarra: estimar la complejidad de fragmentos de código sencillos. Demostración conceptual de una pila con objetos físicos (analogía de platos apilados) y trazado manual de push/pop.
 
 **Actividad de laboratorio**
-Configuración del entorno (Python 3, VS Code, cuenta de GitHub, creación de tu copia del repositorio con "Use this template"). Implementación de una clase `Pila` usando una lista de Python como contenedor, con métodos `push`, `pop`, `peek` e `is_empty`. Pruebas con casos simples (pila vacía, desbordamiento lógico).
+Configuración del entorno (Python 3, VS Code, cuenta de GitHub, entrega del usuario de GitHub en Google Classroom para recibir tu copia privada del repositorio). Implementación de una clase `Pila` usando una lista de Python como contenedor, con métodos `push`, `pop`, `peek` e `is_empty`. Pruebas con casos simples (pila vacía, desbordamiento lógico).
 
 **Tarea / trabajo autónomo**
 Lectura: capítulo introductorio de Goodrich et al. sobre análisis de algoritmos. Completar y subir a tu copia del repositorio en GitHub la implementación de la pila iniciada en laboratorio, con al menos 5 casos de prueba propios.

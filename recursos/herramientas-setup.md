@@ -66,8 +66,8 @@ git config --global core.editor "code --wait"
 ## 4. GitHub — cuenta y tu copia del repositorio
 
 1. Si no tienes cuenta, crea una en github.com. Usa un nombre de usuario profesional (tu nombre o variante).
-2. Entra a `https://github.com/avila-fiec-up/INF222-Estructura-de-Datos-2026-2` y usa el botón verde **"Use this template" → "Create a new repository"** para crear **tu propia copia privada** (Owner: tu cuenta, Visibility: Private).
-3. En **Settings → Collaborators** de tu copia nueva, agrega al docente (`profangelavila671-spec`).
+2. Responde la pregunta de Google Classroom de la semana 1 con tu **usuario de GitHub** (no tu correo).
+3. El docente te creará tu propia copia privada del repositorio y te agregará como colaborador — recibirás un correo de invitación de GitHub. Acéptala.
 4. Clona tu copia (no la plantilla del docente):
 
 ```bash

@@ -33,7 +33,7 @@ Al finalizar esta semana debes ser capaz de:
 
 ### Laboratorio (miércoles Gr. A / viernes Gr. B)
 
-1. Configuración del entorno: Python 3, VS Code, cuenta de GitHub, creación de tu copia del repositorio ("Use this template")
+1. Configuración del entorno: Python 3, VS Code, cuenta de GitHub, entrega de tu usuario de GitHub en Google Classroom para recibir tu copia privada del repositorio
 2. Implementación de la clase `Pila` con lista de Python
 3. Pruebas con casos simples
 
