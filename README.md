@@ -8,11 +8,11 @@
 
 ## Bienvenida
 
-Este repositorio es la **plantilla** del curso, privada. En la semana 1 el docente crea tu propia
-copia privada y te agrega como colaborador (instrucciones abajo, en "Configuración inicial") — ahí
-trabajas todo el semestre: laboratorios, avances del proyecto final y notas de clase.
+**¿Primera vez aquí? Lee [`GUIA-ESTUDIANTE.md`](GUIA-ESTUDIANTE.md) primero** — es el checklist de qué hacer, en orden, desde antes de la primera clase hasta la sustentación final.
 
-> **Regla de oro**: ninguna entrega se acepta por correo electrónico. Todo va en este repositorio, organizado en la carpeta correcta, antes de la fecha límite.
+Este repositorio es la **plantilla** del curso (pública, para que puedas leer todo el contenido libremente). En la semana 1 obtienes tu propia copia de trabajo — el docente te la crea, o la creas tú mismo con "Use this template" — y ahí trabajas todo el semestre: laboratorios, avances del proyecto final y notas de clase. Detalle en `GUIA-ESTUDIANTE.md` y, para el docente, en `docente/GUIA-ENTREGAS-GITHUB.md`.
+
+> **Regla de oro**: ninguna entrega se acepta por correo electrónico. Todo va en tu copia de este repositorio, organizado en la carpeta correcta, antes de la fecha límite.
 
 ---
 
@@ -119,11 +119,12 @@ python --version     # debe mostrar Python 3.x.x
 git --version        # debe mostrar git version 2.x.x
 ```
 
-Este repositorio (`INF222-Estructura-de-Datos-2026-2`) es la **plantilla del docente** — es privada,
-así que no puedes verla ni copiarla tú mismo. En la semana 1, después de que respondas con tu usuario
-de GitHub en Google Classroom, el docente crea **tu propia copia privada** a partir de esta plantilla
-y te agrega como colaborador. GitHub te manda un correo de invitación automáticamente — acéptala y
-clona tu copia (nunca la plantilla del docente):
+Este repositorio (`INF222-Estructura-de-Datos-2026-2`) es la **plantilla del docente** — es público,
+así que puedes leer todo su contenido libremente, pero tu trabajo va en **tu propia copia**, no aquí.
+Dos formas de obtenerla (ver `GUIA-ESTUDIANTE.md`): el docente te la crea después de que respondas tu
+usuario de GitHub en Google Classroom (te llega invitación por correo, acéptala), o la creas tú mismo
+con el botón **"Use this template"** de esta página y agregas al docente como colaborador. En
+cualquiera de los dos casos, clona tu copia (nunca esta plantilla):
 
 ```bash
 git clone https://github.com/<tu-usuario>/<nombre-de-tu-repo>.git
