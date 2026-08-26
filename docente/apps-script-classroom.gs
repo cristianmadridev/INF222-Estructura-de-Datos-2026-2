@@ -47,7 +47,7 @@ const CONFIG = {
   // curso por API — creándolo tú mismo en la interfaz evitas ese permiso por
   // completo. Deja este campo vacío solo si tu cuenta ya confirmó que puede
   // crear cursos por API (lo sabrás porque no te dio ese error).
-  EXISTING_COURSE_ID: "",
+  EXISTING_COURSE_ID: "https://classroom.google.com/u/2/c/ODY5MjU3NTU5MTY5",
 
   COURSE_NAME: "INF 222 — Estructura de Datos (2026-2)",
   COURSE_SECTION: "Grupo A / Grupo B",
@@ -157,7 +157,14 @@ function main() {
 // ---------------------------------------------------------------------------
 function getOrCreateCourse_() {
   if (CONFIG.EXISTING_COURSE_ID) {
-    return CONFIG.EXISTING_COURSE_ID;
+    // Acepta tanto el ID solo ("ODY5MjU3NTU5MTY5") como la URL completa que
+    // copias del navegador (".../c/ODY5MjU3NTU5MTY5" o ".../c/ID/algo-mas"),
+    // para que pegar la URL completa por error (como pasó la primera vez) no
+    // rompa nada.
+    const match = String(CONFIG.EXISTING_COURSE_ID).match(/\/c\/([^/?#]+)/);
+    const id = match ? match[1] : CONFIG.EXISTING_COURSE_ID;
+    Logger.log("Usando EXISTING_COURSE_ID: %s", id);
+    return id;
   }
   if (CONFIG.DRY_RUN) {
     Logger.log('[DRY_RUN] Crearía el curso "%s"', CONFIG.COURSE_NAME);
