@@ -69,7 +69,7 @@ La política de IA de este curso se resume en una idea: **la IA es un asistente 
 - Canal oficial de anuncios y materiales: aula virtual institucional.
 - Canal oficial de dudas académicas fuera de clase: correo institucional del docente, angel.avila@up.ac.pa (respuesta esperada dentro de 48 horas hábiles).
 - Canal de coordinación de equipos de proyecto: definido libremente por cada equipo (recomendado: un canal de mensajería grupal), sin que el docente participe salvo solicitud expresa.
-- Repositorio de GitHub Classroom como canal oficial de entrega de laboratorios y proyecto; cualquier entrega fuera de este canal no se considerará válida salvo indicación contraria del docente.
+- Tu copia del repositorio en GitHub (creada a partir de la plantilla del curso) como canal oficial de entrega de laboratorios y proyecto; cualquier entrega fuera de este canal no se considerará válida salvo indicación contraria del docente.
 - Horario de atención a estudiantes (consultas presenciales o virtuales): a definir por el docente y publicar en el aula virtual desde la semana 1.
 
 ---

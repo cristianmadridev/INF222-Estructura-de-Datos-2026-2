@@ -8,7 +8,7 @@
 
 ## Bienvenida
 
-Este repositorio es tu espacio de trabajo personal para el semestre. Aquí guardarás todos tus laboratorios, avances del proyecto final y notas de clase. Cada semana el docente publicará en GitHub Classroom la tarea o laboratorio correspondiente: tú trabajas en **tu propio fork** de este repositorio y haces push de tus avances.
+Este repositorio es la **plantilla** del curso. En la semana 1, cada estudiante crea **su propia copia** con el botón "Use this template" de GitHub (instrucciones abajo, en "Configuración inicial") y trabaja ahí durante todo el semestre: laboratorios, avances del proyecto final y notas de clase.
 
 > **Regla de oro**: ninguna entrega se acepta por correo electrónico. Todo va en este repositorio, organizado en la carpeta correcta, antes de la fecha límite.
 
@@ -17,13 +17,13 @@ Este repositorio es tu espacio de trabajo personal para el semestre. Aquí guard
 ## Estructura del repositorio
 
 ```
-INF222-Estructura-de-Datos-2026-2/       (repo INDIVIDUAL en GitHub Classroom)
+INF222-Estructura-de-Datos-2026-2/       (plantilla — 1 copia por estudiante, ver "Configuración inicial")
 ├── syllabus/               → Syllabus oficial del curso (créditos, evaluación, bibliografía)
 ├── politicas/              → Reglas del aula, política de IA, integridad académica
 ├── recursos/               → Guía de instalación de herramientas y referencias bibliográficas
 ├── docker/                 → Entorno reproducible opcional (Python 3.12 + pytest)
 ├── docente/                → Material de planificación del docente (syllabus fuente, plan de 15 semanas,
-│                              rúbricas, guion de clase semana a semana, guía de GitHub Classroom)
+│                              rúbricas, guion de clase semana a semana, guía de entregas por GitHub)
 ├── .github/workflows/      → Autocalificación (corre pytest en cada push)
 ├── modulo-1-estructuras-lineales/
 │   ├── semana-01/          → Intro + Big-O + Pilas
@@ -47,7 +47,7 @@ INF222-Estructura-de-Datos-2026-2/       (repo INDIVIDUAL en GitHub Classroom)
 └── examenes/               → Guías de estudio para los 3 parciales
 ```
 
-> **El proyecto final vive en un repositorio aparte:** [`INF222-Proyecto-Final-2026-2`](../INF222-Proyecto-Final-2026-2/). GitHub Classroom no permite mezclar trabajo individual (este repo, uno por estudiante) con trabajo en equipo (el proyecto, un repo por equipo de 3-4) dentro de una misma asignación — por eso son dos repos y dos invitaciones distintas. El de proyecto se activa en la semana 3, tras el kickoff.
+> **El proyecto final vive en un repositorio aparte:** [`INF222-Proyecto-Final-2026-2`](../INF222-Proyecto-Final-2026-2/) — trabajo individual (este repo, una copia por estudiante) y trabajo en equipo (el proyecto, una copia por equipo de 3-4) se mantienen separados a propósito. El equipo crea su copia del repo de proyecto en la semana 3, tras el kickoff. Ver `docente/GUIA-ENTREGAS-GITHUB.md` para el paso a paso.
 
 ---
 
@@ -117,14 +117,21 @@ python --version     # debe mostrar Python 3.x.x
 git --version        # debe mostrar git version 2.x.x
 ```
 
-Una vez aceptada la asignación en GitHub Classroom, clona **tu** repositorio (no el del docente):
+Crea **tu propia copia** de este repositorio (no trabajes directamente sobre este, es la plantilla compartida):
+
+1. Entra a `https://github.com/avila-fiec-up/INF222-Estructura-de-Datos-2026-2`.
+2. Botón verde **"Use this template" → "Create a new repository"**.
+3. Owner: tu propia cuenta · Visibility: **Private**.
+4. En **Settings → Collaborators** de tu copia nueva, agrega al docente (`profangelavila671-spec`).
+
+Luego clona **tu** copia (no la plantilla del docente):
 
 ```bash
 git clone https://github.com/<tu-usuario>/<nombre-de-tu-repo>.git
 cd <nombre-de-tu-repo>
 ```
 
-**¿Prefieres no instalar Python localmente?** El repo incluye un entorno Docker opcional en `docker/` — ver [`docker/README.md`](docker/README.md). No es obligatorio, pero es el mismo entorno que corre la autocalificación automática en cada push (`.github/workflows/classroom.yml`), así que evita sorpresas de "en mi máquina sí funciona".
+**¿Prefieres no instalar Python localmente?** El repo incluye un entorno Docker opcional en `docker/` — ver [`docker/README.md`](docker/README.md). No es obligatorio, pero es el mismo entorno que corre la autocalificación automática en cada push (`.github/workflows/autograding.yml`), así que evita sorpresas de "en mi máquina sí funciona".
 
 ---
 

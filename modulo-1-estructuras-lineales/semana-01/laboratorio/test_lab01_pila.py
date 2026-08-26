@@ -1,7 +1,7 @@
 """
 Pruebas automáticas — Lab 1 (Pila)
-Este archivo lo ejecuta el autograder de GitHub Classroom en cada push
-(ver .github/workflows/classroom.yml). No lo modifiques: es el mismo
+Este archivo lo ejecuta el autograder por GitHub Actions en cada push
+(ver .github/workflows/autograding.yml). No lo modifiques: es el mismo
 criterio de corrección para todos los estudiantes.
 
 Este archivo es el PATRÓN a seguir para escribir las pruebas de las

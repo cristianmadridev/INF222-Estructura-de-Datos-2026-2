@@ -85,7 +85,7 @@ El curso se desarrolla bajo un enfoque de **aprendizaje activo centrado en el es
 3. **Aprendizaje basado en proyectos (ABP)**: desde la semana 3 los estudiantes trabajan en equipo en un proyecto final que integra progresivamente los contenidos del semestre, con hitos de revisión (propuesta, dos checkpoints, sustentación).
 4. **Pair programming con IA supervisada**: se enseña a los estudiantes a usar asistentes de IA generativa como "par de programación" en laboratorios y proyecto, bajo la condición explícita de declarar su uso y de poder explicar, sin apoyo de la IA, cualquier línea de código entregado. El uso de IA está prohibido en evaluaciones presenciales (parciales).
 5. **Visualización algorítmica**: uso de herramientas como Python Tutor y VisuAlgo para hacer tangible la ejecución de estructuras de datos (punteros, memoria, recorridos).
-6. **Control de versiones desde el primer laboratorio**: todos los laboratorios y el proyecto final se entregan mediante repositorios Git (GitHub Classroom), fomentando buenas prácticas de commits, ramas y documentación.
+6. **Control de versiones desde el primer laboratorio**: todos los laboratorios y el proyecto final se entregan mediante repositorios Git en GitHub (plantillas del curso, ver `GUIA-ENTREGAS-GITHUB.md`), fomentando buenas prácticas de commits, ramas y documentación.
 7. **Evaluación formativa continua**: quices cortos, checkpoints de proyecto y retroalimentación semanal, complementando la evaluación sumativa oficial.
 
 ---
@@ -96,7 +96,7 @@ El curso se desarrolla bajo un enfoque de **aprendizaje activo centrado en el es
 |---|---|
 | Lenguaje de programación | Python 3 (versión estable más reciente) |
 | Entorno de desarrollo | Visual Studio Code |
-| Control de versiones | Git y GitHub (GitHub Classroom para laboratorios y proyecto) |
+| Control de versiones | Git y GitHub (repositorios plantilla para laboratorios y proyecto) |
 | Asistentes de IA generativa | GitHub Copilot, Claude, ChatGPT (uso declarado y supervisado — ver `05-Reglas-del-juego-politicas-aula.md`) |
 | Visualizadores algorítmicos | Python Tutor, VisuAlgo |
 | Entorno alterno / respaldo | Replit |

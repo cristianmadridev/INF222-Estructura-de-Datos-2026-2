@@ -63,11 +63,12 @@ git config --global core.editor "code --wait"
 
 ---
 
-## 4. GitHub — cuenta y GitHub Classroom
+## 4. GitHub — cuenta y tu copia del repositorio
 
 1. Si no tienes cuenta, crea una en github.com. Usa un nombre de usuario profesional (tu nombre o variante).
-2. Acepta la invitación a la organización de GitHub Classroom que el docente enviará al inicio del semestre. El link llega por el aula virtual institucional.
-3. Una vez aceptada la invitación a la tarea de la semana 1, se creará automáticamente **tu repositorio personal** del curso. Clónalo:
+2. Entra a `https://github.com/avila-fiec-up/INF222-Estructura-de-Datos-2026-2` y usa el botón verde **"Use this template" → "Create a new repository"** para crear **tu propia copia privada** (Owner: tu cuenta, Visibility: Private).
+3. En **Settings → Collaborators** de tu copia nueva, agrega al docente (`profangelavila671-spec`).
+4. Clona tu copia (no la plantilla del docente):
 
 ```bash
 git clone https://github.com/<tu-usuario>/<nombre-del-repo>.git
@@ -140,7 +141,7 @@ Si prefieres no instalar Python localmente, o quieres eliminar por completo el r
 docker compose -f docker/docker-compose.yml run --rm lab
 ```
 
-Ver `docker/README.md` para el detalle. Es el mismo entorno que usa la autocalificación de GitHub Classroom, así que si tus pruebas pasan ahí, van a pasar en la corrección automática. **No es obligatorio** — instalar Python 3 localmente (opción 1) es suficiente para todo el curso.
+Ver `docker/README.md` para el detalle. Es el mismo entorno que usa la autocalificación por GitHub Actions, así que si tus pruebas pasan ahí, van a pasar en la corrección automática. **No es obligatorio** — instalar Python 3 localmente (opción 1) es suficiente para todo el curso.
 
 ---
 

@@ -74,7 +74,7 @@ Los tres exámenes parciales son evaluaciones **presenciales, individuales, sin 
 
 ### 2.1 Especificación general
 
-El proyecto final es un trabajo en equipo (3-4 integrantes) que debe **aplicar correctamente al menos tres estructuras de datos distintas** trabajadas durante el semestre (por ejemplo: pila, lista enlazada y árbol; o cola, grafo y BST; entre otras combinaciones válidas) para resolver un problema real o realista, implementado en Python 3, versionado en Git/GitHub (GitHub Classroom), y documentado con declaración explícita del uso de herramientas de IA generativa durante su desarrollo.
+El proyecto final es un trabajo en equipo (3-4 integrantes) que debe **aplicar correctamente al menos tres estructuras de datos distintas** trabajadas durante el semestre (por ejemplo: pila, lista enlazada y árbol; o cola, grafo y BST; entre otras combinaciones válidas) para resolver un problema real o realista, implementado en Python 3, versionado en Git/GitHub (repositorio plantilla del proyecto), y documentado con declaración explícita del uso de herramientas de IA generativa durante su desarrollo.
 
 ### 2.2 Requisitos mínimos
 

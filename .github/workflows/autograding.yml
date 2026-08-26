@@ -1,0 +1,37 @@
+name: Autocalificación (pytest)
+
+# No depende de GitHub Classroom ni de sus acciones de terceros: corre pytest
+# directamente y deja un resumen legible en la pestaña Actions de tu propio
+# repo. Los tests de cada semana se agregan progresivamente (ver test_lab01_pila.py
+# como plantilla del patrón a seguir).
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install pytest
+
+      - name: Correr pruebas
+        run: |
+          echo "## Resultado de las pruebas" >> "$GITHUB_STEP_SUMMARY"
+          if pytest -q 2>&1 | tee /tmp/pytest-out.txt; then
+            echo "✅ Todas las pruebas encontradas pasaron." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "❌ Hay pruebas fallando — revisa el log completo de este job." >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            tail -n 40 /tmp/pytest-out.txt >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi

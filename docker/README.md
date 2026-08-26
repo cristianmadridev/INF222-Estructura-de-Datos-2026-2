@@ -24,7 +24,7 @@ docker compose -f docker/docker-compose.yml run --rm test modulo-1-estructuras-l
 ## Por qué existe esto
 
 - Congela la versión de Python y de `pytest` para que "funciona en mi máquina" no sea excusa ni sorpresa al momento de la entrega o de la corrección.
-- Es el mismo entorno que usa el flujo de autocalificación de GitHub Classroom (`.github/workflows/classroom.yml`) — si tus pruebas pasan en Docker localmente, van a pasar en el autograder.
+- Es el mismo entorno que usa el flujo de autocalificación por GitHub Actions (`.github/workflows/autograding.yml`) — si tus pruebas pasan en Docker localmente, van a pasar en el autograder.
 - Útil para el proyecto final en equipo: todos los integrantes corren exactamente la misma versión de Python, sin depender de lo que cada quien tenga instalado.
 
 ## Notas
