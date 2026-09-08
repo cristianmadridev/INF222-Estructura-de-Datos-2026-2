@@ -10,121 +10,146 @@ Fecha: ______________________________
 # =============================================================================
 # PARTE 1: NODO (base para la pila enlazada y la cola)
 # =============================================================================
-
 class Nodo:
-    """Nodo básico con un dato y una referencia al siguiente nodo."""
-
     def __init__(self, dato):
         self.dato = dato
-        self.siguiente = None  # referencia al próximo nodo
+        self.siguiente = None
 
+
+# Crear dos nodos
+nodo1 = Nodo(10)
+nodo2 = Nodo(20)
+
+# Conectar los nodos
+nodo1.siguiente = nodo2
+
+
+# Mostrar los datos
+print("Primer nodo:", nodo1.dato)
+print("Segundo nodo:", nodo1.siguiente.dato)
 
 # =============================================================================
 # PARTE 2: PILA ENLAZADA
-# =============================================================================
-
+# ==========================================================
 class PilaEnlazada:
     """
     Pila implementada con nodos enlazados.
     El tope de la pila es la cabeza de la lista de nodos.
     """
 
+    class Nodo:
+     """Nodo básico."""
+
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+
+
+class Pila:
+    """Pila implementada con nodos enlazados."""
+
     def __init__(self):
-        self._cabeza = None  # nodo del tope (None si la pila está vacía)
-        self._tamanio = 0
+        self.tope = None
 
     def push(self, dato):
-        """Inserta dato en el tope. Complejidad: O(1)."""
-        # TODO: crea un nuevo Nodo, ponlo como nueva cabeza
-        pass
+        nuevo = Nodo(dato)
+        nuevo.siguiente = self.tope
+        self.tope = nuevo
 
     def pop(self):
-        """Elimina y retorna el dato del tope. Lanza IndexError si está vacía."""
-        # TODO: guarda el dato de la cabeza, avanza la cabeza al siguiente
-        pass
+        if self.tope is None:
+            raise IndexError("Pila vacía")
 
-    def peek(self):
-        """Retorna (sin eliminar) el dato del tope. Lanza IndexError si está vacía."""
-        # TODO
-        pass
+        dato = self.tope.dato
+        self.tope = self.tope.siguiente
+        return dato
 
-    def is_empty(self):
-        """Retorna True si la pila está vacía."""
-        return self._cabeza is None
 
-    def size(self):
-        """Retorna el número de elementos."""
-        return self._tamanio
+# Prueba
+pila = Pila()
 
-    def __str__(self):
-        """Representación: tope → ... → base"""
-        # TODO
-        pass
+pila.push(10)
+pila.push(20)
 
+print("Sale:", pila.pop())
+print("Sale:", pila.pop())
 
 # =============================================================================
 # PARTE 3: VERIFICADOR DE PARÉNTESIS BALANCEADOS
 # =============================================================================
 
 def parentesis_balanceados(cadena):
-    """
-    Retorna True si todos los pares de paréntesis, corchetes y llaves
-    en `cadena` están correctamente balanceados; False en caso contrario.
-    Usa la clase PilaEnlazada.
-
-    Ejemplos:
-        parentesis_balanceados("({[]})")  → True
-        parentesis_balanceados("([)]")    → False
-        parentesis_balanceados("{[")      → False
-    """
-    # TODO: implementa el algoritmo con una PilaEnlazada
-    # Tip: define un diccionario de pares cierre→apertura
     pares = {')': '(', ']': '[', '}': '{'}
     aperturas = set(pares.values())
-    pass
+
+    pila = PilaEnlazada()
+
+    for caracter in cadena:
+
+        if caracter in aperturas:
+            pila.push(caracter)
+
+        elif caracter in pares:
+            if pila.is_empty():
+                return False
+
+            if pila.pop() != pares[caracter]:
+                return False
+
+    return pila.is_empty()
 
 
 # =============================================================================
 # PARTE 4: COLA (QUEUE)
 # =============================================================================
 
+class Nodo:
+    """Nodo básico."""
+
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+
+
 class Cola:
-    """
-    Cola implementada con nodos enlazados.
-    - enqueue agrega al final (cola)
-    - dequeue saca del frente (cabeza)
-    """
+    """Cola implementada con nodos enlazados."""
 
     def __init__(self):
-        self._frente = None  # nodo del frente (primer en salir)
-        self._final = None   # nodo del final (último en entrar)
-        self._tamanio = 0
+        self.frente = None
+        self.final = None
 
     def enqueue(self, dato):
-        """Agrega dato al final de la cola. Complejidad: O(1)."""
-        # TODO
-        pass
+        nuevo = Nodo(dato)
+
+        if self.final is None:
+            self.frente = nuevo
+            self.final = nuevo
+        else:
+            self.final.siguiente = nuevo
+            self.final = nuevo
 
     def dequeue(self):
-        """Elimina y retorna el dato del frente. Lanza IndexError si está vacía."""
-        # TODO
-        pass
+        if self.frente is None:
+            raise IndexError("Cola vacía")
 
-    def front(self):
-        """Retorna (sin eliminar) el dato del frente. Lanza IndexError si está vacía."""
-        # TODO
-        pass
+        dato = self.frente.dato
+        self.frente = self.frente.siguiente
 
-    def is_empty(self):
-        return self._frente is None
+        if self.frente is None:
+            self.final = None
 
-    def size(self):
-        return self._tamanio
+        return dato
 
-    def __str__(self):
-        """Representación: frente → ... → final"""
-        # TODO
-        pass
+
+# Prueba
+cola = Cola()
+
+cola.enqueue(10)
+cola.enqueue(20)
+cola.enqueue(30)
+
+print(cola.dequeue())
+print(cola.dequeue())
 
 
 # =============================================================================
@@ -144,50 +169,106 @@ class TrabajoImpresion:
 
 def simulador_impresion(trabajos):
     """
-    Simula una cola de impresión. Recibe una lista de tuplas (nombre, páginas).
-    Imprime en orden de llegada (FIFO) el nombre de cada trabajo y cuántas páginas tiene.
-    Al final muestra el total de páginas impresas.
-
-    Ejemplo de uso:
-        trabajos = [("Tesis cap1", 12), ("Factura", 1), ("Informe", 8)]
-        simulador_impresion(trabajos)
+    Simula una cola de impresión.
+    Recibe una lista de tuplas (nombre, páginas).
+    Imprime los trabajos en orden FIFO.
     """
-    # TODO: encola todos los trabajos, luego deséncola uno por uno mostrando el progreso
-    pass
 
+    cola = Cola()
+    total = 0
+
+    # Encolar los trabajos
+    for nombre, paginas in trabajos:
+        trabajo = TrabajoImpresion(nombre, paginas)
+        cola.enqueue(trabajo)
+
+    # Desencolar e imprimir
+    while not cola.is_empty():
+        trabajo = cola.dequeue()
+
+        print("Imprimiendo:", trabajo)
+
+        total = total + trabajo.paginas
+
+    print("Total de páginas impresas:", total)
+
+
+# Prueba
+trabajos = [
+    ("Tesis cap1", 12),
+    ("Factura", 1),
+    ("Informe", 8)
+]
+
+simulador_impresion(trabajos)
 
 # =============================================================================
 # CASOS DE PRUEBA
 # =============================================================================
 
 if __name__ == "__main__":
+
     print("=" * 55)
     print("PARTE 2: Pila Enlazada")
     print("=" * 55)
-    # TODO: prueba push, pop, peek, is_empty, size, __str__
+
+    pila = PilaEnlazada()
+
+    pila.push(10)
+    pila.push(20)
+    pila.push(30)
+
+    print("Tope:", pila.peek())
+    print("Sale:", pila.pop())
+    print("Tope:", pila.peek())
+    print("¿Está vacía?:", pila.is_empty())
+
 
     print("\n" + "=" * 55)
     print("PARTE 3: Verificador de Paréntesis Balanceados")
     print("=" * 55)
+
     casos = [
         ("({[]})", True),
         ("([)]", False),
         ("{[", False),
-        ("", True),          # cadena vacía: balanceada por vacío
+        ("", True),
         ("3 + (4 * [2])", True),
     ]
+
     for cadena, esperado in casos:
         resultado = parentesis_balanceados(cadena)
         estado = "OK" if resultado == esperado else "ERROR"
-        print(f"  [{estado}] '{cadena}' → {resultado} (esperado: {esperado})")
+
+        print(f"  [{estado}] '{cadena}' → {resultado} "
+              f"(esperado: {esperado})")
+
 
     print("\n" + "=" * 55)
     print("PARTE 4: Cola")
     print("=" * 55)
-    # TODO: prueba enqueue, dequeue, front, is_empty, size
+
+    cola = Cola()
+
+    cola.enqueue(10)
+    cola.enqueue(20)
+    cola.enqueue(30)
+
+    print("Frente:", cola.peek())
+    print("Sale:", cola.dequeue())
+    print("Frente:", cola.peek())
+    print("¿Está vacía?:", cola.is_empty())
+
 
     print("\n" + "=" * 55)
     print("PARTE 5: Simulador de Impresión")
     print("=" * 55)
-    trabajos = [("Tesis cap1", 12), ("Factura", 1), ("Informe anual", 8), ("CV", 2)]
+
+    trabajos = [
+        ("Tesis cap1", 12),
+        ("Factura", 1),
+        ("Informe anual", 8),
+        ("CV", 2)
+    ]
+
     simulador_impresion(trabajos)
