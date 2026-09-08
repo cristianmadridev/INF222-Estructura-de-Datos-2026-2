@@ -13,8 +13,115 @@ Descripción:
 """
 
 
-# Puedes copiar aquí la clase Pila de lab01, o importarla:
+# P```python
+# Laboratorio 3
+# Simulador sencillo de historial de navegador
+
+
+class Pila:
+    def __init__(self):
+        self.elementos = []
+
+    def meter(self, pagina):
+        self.elementos.append(pagina)
+
+    def sacar(self):
+        if len(self.elementos) == 0:
+            return None
+        return self.elementos.pop()
+
+    def vacia(self):
+        return len(self.elementos) == 0
+
+    def mostrar(self):
+        return self.elementos
+
+
+class Navegador:
+
+    def __init__(self):
+        self.actual = "inicio.com"
+        self.atras = Pila()
+        self.adelante = Pila()
+
+    def visitar(self, pagina):
+        self.atras.meter(self.actual)
+        self.actual = pagina
+
+        # Al visitar una página nueva se pierde el historial de adelante
+        self.adelante = Pila()
+
+    def ir_atras(self):
+        if self.atras.vacia():
+            print("No hay páginas anteriores.")
+            return
+
+        self.adelante.meter(self.actual)
+        self.actual = self.atras.sacar()
+
+    def ir_adelante(self):
+        if self.adelante.vacia():
+            print("No hay páginas siguientes.")
+            return
+
+        self.atras.meter(self.actual)
+        self.actual = self.adelante.sacar()
+
+    def mostrar(self):
+        print("\n--- Estado del navegador ---")
+        print("Página actual:", self.actual)
+        print("Páginas atrás:", self.atras.mostrar())
+        print("Páginas adelante:", self.adelante.mostrar())
+
+
+# Programa principal
+
+navegador = Navegador()
+
+print("=== HISTORIAL DEL NAVEGADOR ===")
+
+navegador.visitar("google.com")
+navegador.visitar("youtube.com")
+navegador.visitar("github.com")
+
+navegador.mostrar()
+
+print("\n--- Ir atrás ---")
+navegador.ir_atras()
+navegador.mostrar()
+
+print("\n--- Ir atrás otra vez ---")
+navegador.ir_atras()
+navegador.mostrar()
+
+print("\n--- Ir adelante ---")
+navegador.ir_adelante()
+navegador.mostrar()
+
+print("\n--- Visitar una página nueva ---")
+navegador.visitar("classroom.google.com")
+navegador.mostrar()
+
+# Asta aqui llega el codigo de mi linea
+# Tanto como el primer Lab  como el segundo Lab  como este Lab 3 se uso cloude. Alguno lineas las ajuste a lo que se pedia.
 # from modulo_1_estructuras_lineales.semana_01.laboratorio.lab01_pila import Pila
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Pila:
