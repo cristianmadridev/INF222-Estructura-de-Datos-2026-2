@@ -24,3 +24,5 @@ y = x
 y = y + 1        # crea un int nuevo (43) y y pasa a apuntar a él
 print(x)         # 42  <- x no cambió
 print(x is y)    # False
+
+# Se tomo ayuda de cloude como de youtube para entender el trabajo
