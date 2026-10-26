@@ -256,3 +256,5 @@ def comparar_tiempos(tamanos=(1_000, 5_000, 10_000, 20_000, 40_000)):
 if __name__ == "__main__":
     pruebas()
     comparar_tiempos()
+
+    # Pdf de claude entender el proyecto mas ayuda de claude

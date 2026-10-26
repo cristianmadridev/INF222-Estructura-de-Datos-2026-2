@@ -5,8 +5,6 @@ Estudiante: _________________________
 Grupo: ______________________________
 Fecha: ______________________________
 """
-
-
 class Nodo:
     def __init__(self, dato):
         self.dato = dato
@@ -17,7 +15,6 @@ class Nodo:
 # PARTE 1: LISTA ENLAZADA CIRCULAR
 # El último nodo apunta al primero (no a None).
 # =============================================================================
-
 class ListaCircular:
     """
     Lista enlazada circular. El atributo `_cola` apunta al ÚLTIMO nodo
@@ -37,20 +34,20 @@ class ListaCircular:
             self._cola = nuevo
         else:
             nuevo.siguiente = self._cola.siguiente  # nuevo → primero
-            self._cola.siguiente = nuevo            # cola → nuevo (ahora nuevo es el primero)
+            self._cola.siguiente = nuevo            # cola → nuevo (ahora es el primero)
         self._tamanio += 1
 
     def insertar_final(self, dato):
         """Inserta dato al final de la lista. O(1)."""
-        self.insertar_inicio(dato)   # inserta al inicio...
-        self._cola = self._cola.siguiente  # ...luego avanza la cola (el recién insertado es el último)
+        self.insertar_inicio(dato)         # inserta al inicio...
+        self._cola = self._cola.siguiente  # ...y avanza la cola: el nuevo es el último
 
     def eliminar_inicio(self):
         """Elimina y retorna el dato del inicio. Lanza IndexError si está vacía."""
         if self._cola is None:
             raise IndexError("eliminar en lista circular vacía")
         primero = self._cola.siguiente
-        if primero == self._cola:    # solo un nodo
+        if primero is self._cola:    # solo un nodo
             self._cola = None
         else:
             self._cola.siguiente = primero.siguiente
@@ -84,7 +81,7 @@ class ListaCircular:
 # =============================================================================
 # PARTE 2: LISTA CIRCULAR CON NODO CABEZA (SENTINELA)
 # Hay un nodo fijo (centinela) que no contiene dato útil.
-# La lista está vacía cuando cabeza.siguiente == cabeza.
+# La lista está vacía cuando centinela.siguiente == centinela.
 # =============================================================================
 
 class ListaCircularConCabeza:
@@ -108,13 +105,26 @@ class ListaCircularConCabeza:
 
     def insertar_final(self, dato):
         """Inserta dato justo antes del centinela (al final). O(n) sin puntero al final."""
-        # TODO: recorre hasta el nodo cuyo siguiente es el centinela, luego inserta
-        pass
+        anterior = self._centinela
+        while anterior.siguiente is not self._centinela:  # buscar el último nodo
+            anterior = anterior.siguiente
+        nuevo = Nodo(dato)
+        nuevo.siguiente = self._centinela   # el nuevo cierra el círculo
+        anterior.siguiente = nuevo
+        self._tamanio += 1
 
     def eliminar(self, dato):
         """Elimina la primera ocurrencia de dato. Retorna True si se encontró."""
-        # TODO: recorre buscando el dato; al encontrarlo, desencadena el nodo
-        pass
+        anterior = self._centinela
+        actual = self._centinela.siguiente
+        while actual is not self._centinela:
+            if actual.dato == dato:
+                anterior.siguiente = actual.siguiente   # saltar el nodo
+                self._tamanio -= 1
+                return True
+            anterior = actual
+            actual = actual.siguiente
+        return False
 
     def recorrer(self):
         """Retorna lista con todos los datos desde el inicio hasta antes del centinela."""
@@ -147,16 +157,23 @@ def josephus(n, k):
     k: cuenta hasta k para eliminar a alguien
     Retorna: el número de la persona que sobrevive.
     """
+    if n <= 0 or k <= 0:
+        raise ValueError("Para Josephus se requieren n > 0 y k > 0.")
+
     lista = ListaCircular()
     for i in range(1, n + 1):
         lista.insertar_final(i)
 
-    # TODO: mientras quede más de una persona:
-    #   - cuenta k posiciones avanzando la "cola" (el nodo antes del que se elimina)
-    #   - elimina el nodo que corresponde
-    # Cuando quede una persona, retorna su dato
+    anterior = lista._cola          # nodo anterior al primero (la persona 1)
+    while lista.tamanio() > 1:
+        for _ in range(k - 1):      # avanzar hasta el nodo anterior al k-ésimo
+            anterior = anterior.siguiente
+        eliminado = anterior.siguiente
+        anterior.siguiente = eliminado.siguiente   # sacar al k-ésimo del círculo
+        lista._tamanio -= 1
+        lista._cola = anterior      # mantener la lista consistente
 
-    pass
+    return lista._cola.dato         # único sobreviviente
 
 
 # =============================================================================
