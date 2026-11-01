@@ -6,66 +6,116 @@ Grupo: ______________________________
 Fecha: ______________________________
 """
 
-import time
+Laboratorio 9 - Algoritmos de ordenación + comparación de tiempos
+Ruta: modulo-3-recursividad-ordenacion-busqueda/semana-09/laboratorio/lab09_ordenacion.py
+
+
+
 import random
+import time
 
 
 # =============================================================================
 # ALGORITMOS DE ORDENACIÓN
-# Implementa cada función. IMPORTANTE: trabaja sobre una COPIA del arreglo
-# (usa lista[:] o list(lista)) para no alterar el original en las comparaciones.
 # =============================================================================
 
 def burbuja(arr):
     """
-    Ordena arr de menor a mayor usando bubble sort.
-    Optimización: si en una pasada no hubo intercambios, el arreglo ya está ordenado.
-    Retorna la lista ordenada (copia, no modifica el original).
-    Complejidad: O(n) mejor caso (con flag), O(n²) promedio y peor caso.
+    Bubble sort con flag de optimización.
+    Complejidad: O(n) mejor caso, O(n²) promedio y peor caso.
+    In situ (sobre la copia) y estable.
     """
-    lista = list(arr)  # trabaja sobre copia
+    lista = list(arr)
     n = len(lista)
-    # TODO: implementa burbuja con el flag de optimización
+    for i in range(n - 1):
+        hubo_intercambio = False
+        # Tras cada pasada, los últimos i elementos ya están en su lugar
+        for j in range(n - 1 - i):
+            if lista[j] > lista[j + 1]:
+                lista[j], lista[j + 1] = lista[j + 1], lista[j]
+                hubo_intercambio = True
+        if not hubo_intercambio:
+            break  # ya está ordenado
     return lista
 
 
 def seleccion(arr):
     """
-    Ordena arr de menor a mayor usando selection sort.
-    En cada iteración, encuentra el mínimo del resto y lo lleva a su posición.
-    Retorna la lista ordenada (copia).
-    Complejidad: O(n²) en todos los casos.
+    Selection sort.
+    Complejidad: O(n²) en todos los casos. In situ, no estable.
     """
     lista = list(arr)
     n = len(lista)
-    # TODO: implementa seleccion
+    for i in range(n - 1):
+        idx_min = i
+        for j in range(i + 1, n):
+            if lista[j] < lista[idx_min]:
+                idx_min = j
+        if idx_min != i:
+            lista[i], lista[idx_min] = lista[idx_min], lista[i]
     return lista
 
 
 def insercion(arr):
     """
-    Ordena arr de menor a mayor usando insertion sort.
-    Eficiente para arreglos pequeños o casi ordenados.
-    Retorna la lista ordenada (copia).
-    Complejidad: O(n) mejor caso (casi ordenado), O(n²) promedio y peor caso.
+    Insertion sort.
+    Complejidad: O(n) mejor caso, O(n²) promedio y peor caso.
+    In situ y estable.
     """
     lista = list(arr)
-    # TODO: implementa insercion
+    for i in range(1, len(lista)):
+        clave = lista[i]
+        j = i - 1
+        # Desplaza a la derecha los elementos mayores que la clave
+        while j >= 0 and lista[j] > clave:
+            lista[j + 1] = lista[j]
+            j -= 1
+        lista[j + 1] = clave
     return lista
 
 
 # =============================================================================
-# AMPLIACIÓN OPCIONAL: merge sort (O(n log n))
+# AMPLIACIÓN OPCIONAL: O(n log n)
 # =============================================================================
 
 def merge_sort(arr):
     """
-    Ordena arr usando merge sort (dividir y vencer).
-    Retorna una nueva lista ordenada.
-    Complejidad: O(n log n) en todos los casos. No es in situ (requiere memoria extra).
+    Merge sort (dividir y vencer).
+    Complejidad: O(n log n) en todos los casos. Estable, no in situ.
     """
-    # TODO (opcional / ampliación)
-    pass
+    if len(arr) <= 1:
+        return list(arr)
+    medio = len(arr) // 2
+    izq = merge_sort(arr[:medio])
+    der = merge_sort(arr[medio:])
+
+    resultado = []
+    i = j = 0
+    while i < len(izq) and j < len(der):
+        if izq[i] <= der[j]:  # <= mantiene la estabilidad
+            resultado.append(izq[i])
+            i += 1
+        else:
+            resultado.append(der[j])
+            j += 1
+    resultado.extend(izq[i:])
+    resultado.extend(der[j:])
+    return resultado
+
+
+def quick_sort(arr):
+    """
+    Quick sort (dividir y vencer) con pivote aleatorio y partición en tres grupos.
+    Complejidad: O(n log n) promedio, O(n²) peor caso (muy improbable con pivote aleatorio).
+    Esta versión básica usa listas auxiliares (no es in situ).
+    """
+    if len(arr) <= 1:
+        return list(arr)
+    pivote = arr[random.randrange(len(arr))]
+    menores = [x for x in arr if x < pivote]
+    iguales = [x for x in arr if x == pivote]
+    mayores = [x for x in arr if x > pivote]
+    return quick_sort(menores) + iguales + quick_sort(mayores)
 
 
 # =============================================================================
@@ -105,14 +155,24 @@ def medir_tiempo(algoritmo, arr):
 # VERIFICACIÓN DE CORRECTITUD
 # =============================================================================
 
+ALGORITMOS = [
+    ("burbuja", burbuja),
+    ("seleccion", seleccion),
+    ("insercion", insercion),
+    ("merge_sort", merge_sort),
+    ("quick_sort", quick_sort),
+]
+
+
 def verificar_todos(casos_prueba):
-    """Verifica que los tres algoritmos producen el mismo resultado que sorted()."""
+    """Verifica que los algoritmos producen el mismo resultado que sorted()."""
     print("Verificando correctitud...")
     for desc, arr in casos_prueba:
+        original = list(arr)
         esperado = sorted(arr)
-        for nombre, func in [("burbuja", burbuja), ("seleccion", seleccion), ("insercion", insercion)]:
+        for nombre, func in ALGORITMOS:
             resultado = func(arr)
-            ok = resultado == esperado
+            ok = resultado == esperado and arr == original  # y no modificó el original
             print(f"  [{('OK' if ok else 'ERROR')}] {nombre:10s} en '{desc}'")
             if not ok:
                 print(f"       esperado: {esperado[:10]}...")
@@ -133,12 +193,14 @@ if __name__ == "__main__":
         ("ya ordenado", [1, 2, 3, 4, 5]),
         ("invertido", [5, 4, 3, 2, 1]),
         ("aleatorio", [3, 1, 4, 1, 5, 9, 2, 6]),
+        ("trazado clase", [5, 3, 8, 1, 4]),
+        ("con repetidos", [2, 2, 1, 1, 3, 3]),
     ]
     verificar_todos(casos_prueba)
 
-    print("\n" + "=" * 65)
+    print("\n" + "=" * 85)
     print("Comparación de tiempos (en segundos)")
-    print("=" * 65)
+    print("=" * 85)
 
     tamanios = [100, 1_000, 5_000, 10_000]
     tipos = [
@@ -147,7 +209,8 @@ if __name__ == "__main__":
         ("invertido", arreglo_invertido),
     ]
 
-    encabezado = f"{'N':>7} | {'tipo':>10} | {'burbuja':>10} | {'seleccion':>10} | {'insercion':>10}"
+    encabezado = (f"{'N':>7} | {'tipo':>10} | {'burbuja':>10} | {'seleccion':>10} | "
+                  f"{'insercion':>10} | {'merge':>10} | {'quick':>10}")
     print(encabezado)
     print("-" * len(encabezado))
 
@@ -157,9 +220,15 @@ if __name__ == "__main__":
             _, t_burbuja   = medir_tiempo(burbuja,   arr)
             _, t_seleccion = medir_tiempo(seleccion, arr)
             _, t_insercion = medir_tiempo(insercion, arr)
-            print(f"{n:>7,} | {desc:>10} | {t_burbuja:>10.4f} | {t_seleccion:>10.4f} | {t_insercion:>10.4f}")
+            _, t_merge     = medir_tiempo(merge_sort, arr)
+            _, t_quick     = medir_tiempo(quick_sort, arr)
+            print(f"{n:>7,} | {desc:>10} | {t_burbuja:>10.4f} | {t_seleccion:>10.4f} | "
+                  f"{t_insercion:>10.4f} | {t_merge:>10.4f} | {t_quick:>10.4f}")
 
     print("\n¿Qué observas? Escribe tus conclusiones aquí:")
     print("  1. ___________")
     print("  2. ___________")
     print("  3. ___________")
+
+    #https://www.youtube.com/watch?v=xqvEb6Iqtuw
+    #Claude
